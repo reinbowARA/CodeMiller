@@ -4,11 +4,29 @@ class MillerCode
 {
     static void Main(string[] args)
     {
-        string input = "1011101010"; // входные данные
+        string input = "1011101010";
 
-        Console.WriteLine(MilerCode(input)); // выводим результат
+        //string signal = MilerCode(input);
+        String str = "01111001100001111000";
+        string words = "";
+        for (int i = 0; i < str.Length; i += 2) {
+        words += str.Substring(i, 2) + " ";
+        }
+
+        string[] word = words.Split(' ');
+        string output = "";
+        for (int i = 0; i < word.Length; i++)
+        {
+            if (word[i] == "00" || word[i] == "11"){
+                output += '0';
+            }else{
+                output += '1';
+            }
+        }
+        Console.WriteLine(output);
+        
     }
-    public static String MilerCode(String inputSignal, int state0=0, int state1=1, String output="")
+    public static String MilerCode(String inputSignal, int state0 = 0, int state1 = 1, String output = "")
     {
         for (int i = 0; i < inputSignal.Length; i++)
         {
@@ -69,4 +87,15 @@ class MillerCode
         }
         return output;
     }
+           static List<string> SplitString(string str)
+        {
+            List<string> list = new List<string>();
+            int i = 0;
+            while (i < str.Length - 1)
+            {
+                list.Add(str.Substring(i, 2));
+                i += 2;
+            }
+            return list;
+        }
 }
