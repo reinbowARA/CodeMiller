@@ -5,14 +5,16 @@ class MillerCode
     static void Main(string[] args)
     {
         string input = "1011101010"; // входные данные
-        string output = ""; // выходные данные
-        int state1 = 1; // начальное состояние
-        int state0 = 0;
-        for (int i = 0; i < input.Length; i++)
+
+        Console.WriteLine(MilerCode(input)); // выводим результат
+    }
+    public static String MilerCode(String inputSignal, int state0=0, int state1=1, String output="")
+    {
+        for (int i = 0; i < inputSignal.Length; i++)
         {
-            if (input[i] == '1')
+            if (inputSignal[i] == '1')
             {
-                if (state1 == 1 )
+                if (state1 == 1)
                 {
                     output += "01";
                     state1 = 3;
@@ -33,11 +35,11 @@ class MillerCode
                 else if (state1 == 0)
                 {
                     output += "00";
-                    state1= 1;
-                    state0= 2;
+                    state1 = 1;
+                    state0 = 2;
                 }
             }
-            else if (input[i] == '0')
+            else if (inputSignal[i] == '0')
             {
                 if (state0 == 3)
                 {
@@ -55,7 +57,7 @@ class MillerCode
                 {
                     output += "01";
                     state0 = 2;
-                    state1= 3;
+                    state1 = 3;
                 }
                 else if (state0 == 0)
                 {
@@ -65,7 +67,6 @@ class MillerCode
                 }
             }
         }
-
-        Console.WriteLine(output); // выводим результат
+        return output;
     }
 }
