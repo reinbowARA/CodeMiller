@@ -6,24 +6,10 @@ class MillerCode
     {
         string input = "1011101010";
 
-        //string signal = MilerCode(input);
-        String str = "01111001100001111000";
-        string words = "";
-        for (int i = 0; i < str.Length; i += 2) {
-        words += str.Substring(i, 2) + " ";
-        }
-
-        string[] word = words.Split(' ');
-        string output = "";
-        for (int i = 0; i < word.Length; i++)
-        {
-            if (word[i] == "00" || word[i] == "11"){
-                output += '0';
-            }else{
-                output += '1';
-            }
-        }
-        Console.WriteLine(output);
+        string signal = MilerCode(input);
+        string outputsignal = DecodeMiller(signal);
+       
+        Console.WriteLine(signal+ " "+ outputsignal);
         
     }
     public static String MilerCode(String inputSignal, int state0 = 0, int state1 = 1, String output = "")
@@ -87,15 +73,21 @@ class MillerCode
         }
         return output;
     }
-           static List<string> SplitString(string str)
-        {
-            List<string> list = new List<string>();
-            int i = 0;
-            while (i < str.Length - 1)
-            {
-                list.Add(str.Substring(i, 2));
-                i += 2;
-            }
-            return list;
+    public static string DecodeMiller(string str, string words=""){
+        for (int i = 0; i < str.Length; i += 2) {
+        words += str.Substring(i, 2) + " ";
         }
+
+        string[] word = words.Split(' ');
+        string output = "";
+        for (int i = 0; i < word.Length; i++)
+        {
+            if (word[i] == "00" || word[i] == "11"){
+                output += '0';
+            }else{
+                output += '1';
+            }
+        }
+        return output;
+    }
 }
