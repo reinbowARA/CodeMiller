@@ -1,15 +1,20 @@
 ﻿using System;
+using System.Text;
 
 class MillerCode
 {
     static void Main(string[] args)
     {
-        string input = "1011101010";
+        string input = "01011101010";
 
         string signal = MilerCode(input);
-        string outputsignal = DecodeMiller(signal);
+        string OutputSignal = DecodeMiller(signal);
        
-        Console.WriteLine(signal+ " "+ outputsignal);
+        Console.WriteLine("Miller coder input: "+signal+ " => decode: " + OutputSignal);
+        string value = MFMCoder(input);
+        Console.WriteLine(value);
+        Console.WriteLine(MFMDecode(value));
+
         
     }
     public static String MilerCode(String inputSignal, int state0 = 0, int state1 = 1, String output = "")
@@ -73,9 +78,9 @@ class MillerCode
         }
         return output;
     }
-    public static string DecodeMiller(string str, string words=""){
+    public static String DecodeMiller(string str, string words=""){
         for (int i = 0; i < str.Length; i += 2) {
-        words += str.Substring(i, 2) + " ";
+            words += str.Substring(i, 2) + " ";
         }
 
         string[] word = words.Split(' ');
@@ -89,5 +94,37 @@ class MillerCode
             }
         }
         return output;
+    }
+    public static String MFMCoder(string str){
+        String output = "";
+        str = str + " ";
+        for (int i = 0; i < str.Length; i++)
+        {
+            if(str[i]=='0' && str[i+1]=='0'){
+                output += "1";
+            }else
+            {
+                output += "0";
+            }
+        }
+        if(str[0] != '1'){
+            output = "?"+output;
+        }
+        StringBuilder OutputCoder = new StringBuilder();
+        for (int i = 0; i < Math.Min(str.Length , output.Length ); i++)
+        {
+           OutputCoder.Append(output[i]);
+           OutputCoder.Append(str[i]);
+        }
+        var result = OutputCoder.ToString();
+        return result;
+    }
+
+    public static String MFMDecode(string str){
+        for (int i = 0; i < str.Length; i=i+1)
+        {
+            str = str.Remove(i,1);
+        }
+        return str;
     }
 }
