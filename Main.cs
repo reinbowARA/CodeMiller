@@ -3,7 +3,8 @@ internal class Test
 {
     private static void Main(string[] args)
     {
-        string input = "01011101010";
+        Console.Write("Введите последовательность битов: ");
+        string input = Console.ReadLine();
         var miller = new MillerCode.Miller();
         
         string signal = miller.MilerCode(input);
