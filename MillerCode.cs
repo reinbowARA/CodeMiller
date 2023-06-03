@@ -75,7 +75,7 @@ namespace MillerCode
 
             string[] word = words.Split(' ');
             string output = "";
-            for (int i = 0; i < word.Length; i++)
+            for (int i = 0; i < word.Length-1; i++)
             {
                 if (word[i] == "00" || word[i] == "11")
                 {
